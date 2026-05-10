@@ -1,5 +1,7 @@
 
 // app/page.tsx
+'use client';
+
 export default function BudgetingApp() {
   const transactions = [
     { label: 'Salary', amount: 2000, balance: 2000 },
