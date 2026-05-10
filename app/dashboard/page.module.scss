@@ -1,0 +1,361 @@
+$primary-orange: #fc8019;
+$dark-orange: #e67308;
+$light-orange: #fff5ed;
+$text-dark: #282c3f;
+$text-light: #686b78;
+$white: #ffffff;
+$bg-light: #f9f9f9;
+$shadow: rgba(28, 28, 28, 0.08);
+$green: #48c479;
+$red: #eb4c3d;
+
+.dashboard {
+  min-height: 100vh;
+  background: $bg-light;
+}
+
+.header {
+  background: $white;
+  box-shadow: 0 2px 8px $shadow;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .headerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      .logoIcon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, $primary-orange, $dark-orange);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .logoText {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: $text-dark;
+        letter-spacing: -0.5px;
+      }
+    }
+
+    .userSection {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      .userInfo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem 1rem;
+        background: $light-orange;
+        border-radius: 12px;
+
+        .userIcon {
+          width: 32px;
+          height: 32px;
+          background: $primary-orange;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $white;
+          font-weight: 700;
+          font-size: 0.9rem;
+        }
+
+        .username {
+          font-weight: 700;
+          color: $text-dark;
+          font-size: 0.95rem;
+        }
+      }
+
+      .logoutBtn {
+        background: $white;
+        color: $primary-orange;
+        border: 2px solid $primary-orange;
+        padding: 0.625rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: $primary-orange;
+          color: $white;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(252, 128, 25, 0.3);
+        }
+      }
+    }
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.hero {
+  margin-bottom: 2rem;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $text-dark;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: $text-light;
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+
+  .statCard {
+    background: $white;
+    padding: 1.75rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px $shadow;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(28, 28, 28, 0.12);
+    }
+
+    .statLabel {
+      font-size: 0.9rem;
+      color: $text-light;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .statValue {
+      font-size: 2rem;
+      font-weight: 800;
+      color: $text-dark;
+
+      &.positive {
+        color: $green;
+      }
+
+      &.negative {
+        color: $red;
+      }
+    }
+
+    .statIcon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.transactionSection {
+  background: $white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px $shadow;
+
+  .sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .sectionTitle {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: $text-dark;
+    }
+
+    .addBtn {
+      background: $primary-orange;
+      color: $white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: $dark-orange;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(252, 128, 25, 0.3);
+      }
+    }
+  }
+
+  .transactionList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    .transaction {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.2s ease;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: $bg-light;
+        margin: 0 -1rem;
+        padding: 1.25rem 1rem;
+        border-radius: 12px;
+      }
+
+      .transactionLeft {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .transactionIcon {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+
+          &.income {
+            background: rgba(72, 196, 121, 0.1);
+          }
+
+          &.expense {
+            background: rgba(235, 76, 61, 0.1);
+          }
+        }
+
+        .transactionInfo {
+          .transactionLabel {
+            font-size: 1rem;
+            font-weight: 700;
+            color: $text-dark;
+            margin-bottom: 0.25rem;
+          }
+
+          .transactionDate {
+            font-size: 0.85rem;
+            color: $text-light;
+          }
+        }
+      }
+
+      .transactionRight {
+        text-align: right;
+
+        .transactionAmount {
+          font-size: 1.25rem;
+          font-weight: 800;
+          margin-bottom: 0.25rem;
+
+          &.positive {
+            color: $green;
+          }
+
+          &.negative {
+            color: $red;
+          }
+        }
+
+        .transactionBalance {
+          font-size: 0.85rem;
+          color: $text-light;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: $text-light;
+
+  .emptyIcon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .emptyText {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .headerContent {
+    padding: 1rem;
+
+    .userSection {
+      gap: 0.75rem;
+
+      .userInfo .username {
+        display: none;
+      }
+    }
+  }
+
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero .title {
+    font-size: 1.75rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .transactionSection {
+    padding: 1.5rem;
+
+    .sectionHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .addBtn {
+        width: 100%;
+      }
+    }
+  }
+}

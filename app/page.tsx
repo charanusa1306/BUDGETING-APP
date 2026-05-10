@@ -1,30 +1,112 @@
-
-// app/page.tsx
 'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './page.module.scss';
 
-export default function BudgetingApp() {
-  const transactions = [
-    { label: 'Salary', amount: 2000, balance: 2000 },
-    { label: 'Rent', amount: -150, balance: 1850 },
-    { label: 'Lunch', amount: -25, balance: 1825 },
-    { label: 'Refund', amount: 100, balance: 1925 },
-  ];
+export default function AuthPage() {
+  const router = useRouter();
+  const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  function getUsers(): Record<string, string> {
+    return JSON.parse(localStorage.getItem('users') || '{}');
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    const users = getUsers();
+
+    if (isLogin) {
+      if (users[username] === password) {
+        localStorage.setItem('loggedInUser', username);
+        router.push('/dashboard');
+      } else {
+        setError('Invalid username or password.');
+      }
+    } else {
+      if (users[username]) {
+        setError('Username already exists.');
+      } else {
+        users[username] = password;
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('loggedInUser', username);
+        router.push('/dashboard');
+      }
+    }
+  }
 
   return (
-    <main className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-4xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold">Multi-User Budgeting App</h1>
-        <p className="text-slate-600">Budget tracking for you and your friends.</p>
+    <main className={styles.authPage}>
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          <div className={styles.logoIcon}>💰</div>
+          <span className={styles.logoText}>Sree Charan's BudgetMate</span>
+        </div>
+        <button className={styles.signInBtn}>Get the App</button>
+      </header>
 
-        <div className="bg-white rounded-2xl shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Transaction Log</h2>
-          <div className="space-y-3 font-mono">
-            {transactions.map((t, i) => (
-              <div key={i} className="flex justify-between border-b pb-2">
-                <span>{t.amount > 0 ? '+' : ''}{t.amount} {t.label}</span>
-                <span>Balance: {t.balance}</span>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.hero}>
+            <h1 className={styles.heroTitle}>
+              Track expenses & manage budgets. Master your finances!
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Simple, powerful budgeting for individuals and teams.
+            </p>
+            <div className={styles.features}>
+              <div className={styles.feature}>📊 Real-time expense tracking</div>
+              <div className={styles.feature}>👥 Multi-user budget sharing</div>
+              <div className={styles.feature}>🔒 Bank-level security</div>
+            </div>
+          </div>
+
+          <div className={styles.formCard}>
+            <h2 className={styles.formTitle}>
+              {isLogin ? 'Welcome back!' : 'Create account'}
+            </h2>
+            <p className={styles.formSubtitle}>
+              {isLogin ? 'Login to manage your finances' : 'Sign up to get started'}
+            </p>
+
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.inputGroup}>
+                <label>Username</label>
+                <input
+                  placeholder="Enter your username"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  required
+                />
               </div>
-            ))}
+
+              <div className={styles.inputGroup}>
+                <label>Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              {error && <div className={styles.error}>{error}</div>}
+
+              <button type="submit" className={styles.submitBtn}>
+                {isLogin ? 'Login' : 'Create Account'}
+              </button>
+            </form>
+
+            <div className={styles.toggle}>
+              {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+              <button onClick={() => { setIsLogin(!isLogin); setError(''); }}>
+                {isLogin ? 'Sign up' : 'Login'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
